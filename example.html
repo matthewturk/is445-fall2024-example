@@ -19,6 +19,46 @@
       integrity="sha256-BywFTypjEHJeA4w4px4ABScF4xg1YyRiyXF6I6OE6JU="
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      const CincinattiZoo = [
+        {
+          animal: "pandas",
+          zoo: "Cincinatti Zoo",
+          value: 15,
+        },
+        {
+          animal: "otters",
+          zoo: "Cincinatti Zoo",
+          value: 10,
+        },
+        {
+          animal: "other",
+          zoo: "Cincinatti Zoo",
+          value: 20,
+        },
+        {
+          animal: "monkeys",
+          zoo: "Cincinatti Zoo",
+          value: 3,
+        },
+        {
+          animal: "lions",
+          zoo: "Cincinatti Zoo",
+          value: 2,
+        },
+        {
+          animal: "shrews",
+          zoo: "Cincinatti Zoo",
+          value: 30,
+        },
+        {
+          animal: "elphants",
+          zoo: "Cincinatti Zoo",
+          value: 20,
+        },
+      ];
+    </script>
   </head>
   <body>
     <h1>This is my website</h1>
@@ -30,13 +70,52 @@
       </ol>
     </div>
     <button id="clickme">Click Me</button>
+    <button id="addcinci" style="display: none">Add Cinci</button>
+    <button id="noshrews" style="display: none">No Shrews</button>
     <div id="viz"></div>
 
+    <div id="consoleoutput"></div>
+
     <script>
+      var embedded;
+
       document
         .getElementById("clickme")
         .addEventListener("click", function (event) {
-          vegaEmbed("#viz", "zoo-data.json");
+          embedded = vegaEmbed("#viz", "zoo-data.json");
+          document.getElementById("clickme").style.display = "none";
+          document.getElementById("addcinci").style.display = "block";
+          document.getElementById("noshrews").style.display = "block";
+        });
+
+      document
+        .getElementById("addcinci")
+        .addEventListener("click", function (event) {
+          embedded.then(function (embedResult) {
+            const changeset = vega
+              .changeset()
+              .insert(CincinattiZoo)
+              .remove(function (t) {
+                // Only removes from San Diego!
+                return t.animal === "otters";
+              })
+              .remove(function (t) {
+                // Doesn't remove our new dataset!
+                return t.zoo === "Cincinatti Zoo";
+              });
+            embedResult.view.change("Zoo Data", changeset).run();
+          });
+        });
+
+      document
+        .getElementById("noshrews")
+        .addEventListener("click", function (event) {
+          embedded.then(function (embedResult) {
+            const changeset = vega.changeset().remove(function (t) {
+              return t.animal === "shrews";
+            });
+            embedResult.view.change("Zoo Data", changeset).run();
+          });
         });
     </script>
   </body>

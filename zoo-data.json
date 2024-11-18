@@ -3,6 +3,7 @@
     "width": 500,
     "height": 400,
     "data": {
+        "name": "Zoo Data",
         "values": [
             {
                 "animal": "pandas",
