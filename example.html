@@ -22,17 +22,22 @@
   </head>
   <body>
     <h1>This is my website</h1>
-    <div id>
+    <div id="my-list">
       <ol>
         <li>First</li>
         <li>Second</li>
         <li>Third</li>
       </ol>
     </div>
+    <button id="clickme">Click Me</button>
     <div id="viz"></div>
 
     <script>
-      vegaEmbed("#viz", "myspec.json");
+      document
+        .getElementById("clickme")
+        .addEventListener("click", function (event) {
+          vegaEmbed("#viz", "zoo-data.json");
+        });
     </script>
   </body>
 </html>

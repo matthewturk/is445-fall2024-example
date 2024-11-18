@@ -1,0 +1,59 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 500,
+    "height": 400,
+    "data": {
+        "values": [
+            {
+                "animal": "pandas",
+                "zoo": "San Diego Zoo",
+                "value": 5
+            },
+            {
+                "animal": "otters",
+                "zoo": "San Diego Zoo",
+                "value": 15
+            },
+            {
+                "animal": "other",
+                "zoo": "San Diego Zoo",
+                "value": 5
+            },
+            {
+                "animal": "monkeys",
+                "zoo": "San Diego Zoo",
+                "value": 27
+            },
+            {
+                "animal": "lions",
+                "zoo": "San Diego Zoo",
+                "value": 22
+            },
+            {
+                "animal": "shrews",
+                "zoo": "San Diego Zoo",
+                "value": 20
+            },
+            {
+                "animal": "elphants",
+                "zoo": "San Diego Zoo",
+                "value": 6
+            }
+        ]
+    },
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "zoo",
+            "type": "nominal"
+        },
+        "y": {
+            "field": "value",
+            "type": "quantitative"
+        },
+        "color": {
+            "field": "animal",
+            "type": "nominal"
+        }
+    }
+}
